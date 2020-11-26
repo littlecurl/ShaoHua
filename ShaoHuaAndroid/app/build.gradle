@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "cn.edu.heuet.shaohua"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+//    buildFeatures {
+//        dataBinding true
+//    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout"
+
+    // 启动页，引入 SVG 相关
+    implementation project(':RxKit')
+    implementation "com.jaredrummler:animated-svg-view:$rootProject.ext.animatedSvgView"
+
+    // ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    // 底部导航栏
+    implementation project(':bnve')
+    implementation "com.google.android.material:material:$rootProject.ext.material"
+
+    // 我的个人资料页面
+    implementation project(':RxUI')
+
+    // 网络请求
+    implementation project(':xhttp2-lib')
+
+    // okhttp 要求 API level 21+
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid"
+
+
+    implementation 'com.github.yalantis:ucrop:2.2.2-native'
+
+    //noinspection GradleDependency
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide"
+    //noinspection GradleDependency
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glide"
+    implementation "jp.wasabeef:glide-transformations:$rootProject.ext.glideTransformations"
+
+    implementation "androidx.cardview:cardview:$rootProject.ext.cardview"
+
+
+    // Gson
+    implementation "com.google.code.gson:gson:$rootProject.ext.gson"
+
+    def lifecycle_version = "2.2.0"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+}

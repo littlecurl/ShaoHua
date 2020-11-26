@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 2
+        versionName "2.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compileOnly "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+
+    //使用retrofit的依赖包
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid"
+    //OkHttp的依赖包 retrofit2:2.9.0 强制要求 3.12.x
+    //noinspection GradleDependency
+    compileOnly 'com.squareup.okhttp3:okhttp:3.12.0'
+    //Gson序列化反序列化的依赖包
+    implementation "com.google.code.gson:gson:$rootProject.ext.gson"
+
+    //磁盘缓存的依赖包
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+
+}
+

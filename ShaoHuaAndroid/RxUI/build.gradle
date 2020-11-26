@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+    compileOnly "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout"
+    compileOnly "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerview"
+    //cardView包
+    compileOnly "androidx.cardview:cardview:$rootProject.ext.cardview"
+    compileOnly project(':RxKit')
+
+    //noinspection GradleDependency
+    compileOnly "com.github.bumptech.glide:glide:$rootProject.ext.glide"
+    //noinspection GradleDependency
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glide"
+}
